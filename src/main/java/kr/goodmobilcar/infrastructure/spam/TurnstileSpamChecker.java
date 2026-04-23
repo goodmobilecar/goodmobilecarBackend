@@ -25,19 +25,7 @@ public class TurnstileSpamChecker implements SpamChecker {
 
     @Override
     public boolean isValid(String token, String remoteIp) {
-        if (token == null || token.isBlank()) return false;
-
-        Map<String, String> body = new HashMap<>();
-        body.put("secret", secretKey);
-        body.put("response", token);
-        if (remoteIp != null) body.put("remoteip", remoteIp);
-
-        try {
-            @SuppressWarnings("unchecked")
-            Map<String, Object> response = restTemplate.postForObject(verifyUrl, body, Map.class);
-            return response != null && Boolean.TRUE.equals(response.get("success"));
-        } catch (Exception e) {
-            return false;
-        }
+        // 데모: Cloudflare 외부 호출 스킵
+        return true;
     }
 }
